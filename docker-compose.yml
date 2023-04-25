@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+      args:
+        - NODE_ENV=development
+    volumes:
+      - .:/opt:delegated
+    environment:
+      - TS3_HOST
+      - TS3_QUERYPORT
+      - TS3_USERNAME
+      - TS3_PASSWORD
+      - TS3_NICKNAME
+      - EXCLUDED_SERVER_GROUP_IDS
+      - VATSIM_DATAFEED_URL
+      - API_TOKEN

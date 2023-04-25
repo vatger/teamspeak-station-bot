@@ -1,0 +1,71 @@
+import {TeamSpeakServerGroup} from "ts3-nodejs-library";
+import { teamspeak } from "../app";
+import config from "../config";
+
+const excludedServerGroupIds: number[] = config().excludedServerGroupIds;
+
+async function getCurrentServerGroups() {
+    let serverGroups: TeamSpeakServerGroup[] = await teamspeak.serverGroupList();
+
+    serverGroups = serverGroups.filter((group: TeamSpeakServerGroup) => {
+        return excludedServerGroupIds.indexOf(Number(group.sgid)) == -1;
+    });
+
+    return serverGroups;
+}
+
+async function getClientsInServerGroup(group: TeamSpeakServerGroup) {
+    return group.clientList();
+}
+
+async function isUserMemberOfServerGroup(client_db_id: string, serverGroup: TeamSpeakServerGroup)
+{
+    const clients = await getClientsInServerGroup(serverGroup);
+
+    const isMember = clients.find(client => {
+        return client.cldbid === client_db_id
+    });
+
+    return isMember != null;
+}
+
+async function addClientToServerGroup(client_db_id: string, serverGroup: TeamSpeakServerGroup | undefined)
+{
+    if (serverGroup == null)
+        return;
+
+    if (!await isUserMemberOfServerGroup(client_db_id, serverGroup))
+    {
+        try {
+            await serverGroup.addClient(client_db_id);
+            console.log(`Added client ${client_db_id} to server group: ${serverGroup.name}`);
+        } catch (e: any)
+        {
+            console.error('Failed to add client:', e.msg);
+        }
+    }
+}
+
+async function removeClientFromServerGroup(client_db_id: string, serverGroup: TeamSpeakServerGroup | undefined)
+{
+    if (serverGroup == null)
+        return;
+
+    if (await isUserMemberOfServerGroup(client_db_id, serverGroup))
+    {
+        try {
+            await serverGroup.delClient(client_db_id);
+            console.log(`Removed client ${client_db_id} from server group: ${serverGroup.name}`);
+        } catch (e: any)
+        {
+            console.error('Failed to remove client:', e.msg);
+        }
+    }
+}
+
+export default {
+    getCurrentServerGroups,
+    getClientsInServerGroup,
+    addClientToServerGroup,
+    removeClientFromServerGroup
+};
