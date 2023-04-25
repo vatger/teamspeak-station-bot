@@ -8,8 +8,8 @@
   	},
   	"repository": {
 		"type": "git",
-		"url: "https://github.com/vatger/teamspeak-station-bot"
-  	}
+		"url": "https://github.com/vatger/teamspeak-station-bot"
+  	},
   	"author": "VATSIM Germany <webmaster@vatsim-germany.org>",
   	"license": "GPL3",
   	"description": "",
