@@ -4,7 +4,7 @@ import config from "./config";
 
 export const teamspeak = new TeamSpeak({
     host: config().ts3Host,
-    queryport: config().ts3Queryport,
+    queryport: config().ts3QueryPort,
     username: config().ts3Username,
     password: config().ts3Password,
     nickname: config().ts3Nickname,
@@ -13,7 +13,7 @@ export const teamspeak = new TeamSpeak({
 teamspeak.on("ready", async () => {
     console.log("Teamspeak instance ready");
 
-    await teamspeak.useByPort(9987);
+    await teamspeak.useByPort(config().ts3Port);
 
     // Remove groups and update the prefixes once. Then we use the intervals.
     await ts3Controller.forceRemoveAllGroups();
