@@ -1,30 +1,34 @@
-# TS3 Station Bot
-This project polls the VATSIM Datafeed and assigns Teamspeak server roles based on the current ATC Position 
-on the VATSIM network. The mapping can be defined in the `atc_station_mappings.json` File located in the `data` directory. 
+# Teamspeak3 Station Bot
+This project polls the VATSIM Datafeed and assigns Teamspeak server roles based on the current ATC Position on the VATSIM network. 
+It checks a predefined mapping file and creates teamspeak server roles from this. These mappings are defined in `/data/atc_station_mappings.json`. 
+Should a controller not exist, the bot will automatically assign the currently used callsign on VATSIM for this use-case. 
 
-## Contributing
-If you wish to contribute to this project and/or change the station mappings, please create a pull request containing your changes. These
-will be reviewed as soon as possible and merged into the project. 
+If you wish to contribute and/or make changes (especially regarding the aforementioned mapping file), please check out our contribution guide [here](CONTRIBUTING.md).
 
-## atc_station_mappings.json
-The mapping can be defined in the `atc_station_mappings.json` File located in the `data` directory.
-The following naming scheme must be adhered to when submitting changes to the ATC-Station-Mapping file - this requirement is valid for VATGER
-however can be adapted by any other vACC wishing to use this tool.
+## Contact
 
-Ground Stations (DEL/GND/TWR)
-[<span style="color:green">(last two letters of ICAO Code)</span><span style="color:lightblue">(T/G/C - for Tower/Ground/(Clearance) Delivery)</span><span style="color:red">(Station Identifier, e.g. EDDF_S_TWR)</span>]
-- Example for `EDDF_S_TWR` -> <span style="color:green">DF</span><span style="color:lightblue">T</span><span style="color:red">S</span>
-- Example for `EDDF_W_GND` -> <span style="color:green">DF</span><span style="color:lightblue">G</span><span style="color:red">W</span>
-- Example for `EDDS_DEL` -> <span style="color:green">DS</span><span style="color:lightblue">C</span>
+|    Name    | Responsible for |               Contact               |
+|:----------:|:---------------:|:-----------------------------------:|
+| Nikolas G. |        *        | `nikolas.goerlitz[at]vatger.de` (1) |
+| Moritz F.  |        *        |                - (1)                |
 
-Arrival/Departure Stations (APP/DEP)
-[<span style="color:green">(last two letters of ICAO Code)</span><span style="color:lightblue">(A/D - for Arrival/Departure)</span><span style="color:red">(Station Identifier, e.g. EDDF_N_APP)</span>]
-- Example for `EDDF_N_APP` -> <span style="color:green">DF</span><span style="color:lightblue">A</span><span style="color:red">N</span>
-- Example for `EDDF_N_DEP` -> <span style="color:green">DF</span><span style="color:lightblue">D</span><span style="color:red">N</span>
-- Example for `EDDK_APP` -> <span style="color:green">DK</span><span style="color:lightblue">A</span>
+(1) Also available through the VATSIM Germany Forum
 
-Center Stations (CTR)
-[<span style="color:green">(last two letters of FIR/UIR)</span><span style="color:lightblue">(0 or 3 letters that uniquely identify the sector - 0 in the case of 'complete' center stations (e.g. EDMM_CTR, EDGG_CTR, ...))</span>]
-- Example for `EDGG_KTG_CTR` -> <span style="color:green">GG</span><span style="color:lightblue">KTG</span>
-- Example for `EDUU_WUR_CTR` -> <span style="color:green">UU</span><span style="color:lightblue">WUR</span>
-- Example for `EDGG_CTR` -> <span style="color:green">GG</span>
+## Running the Application
+Running this application in a local environment is a little more challenging, since it requires the use of a local teamspeak3 server. 
+The downloads for teamspeak-server can be found [here](https://www.teamspeak.com/de/downloads/#server). 
+Documentation is included in the downloaded .zip archive. 
+
+1. Install **node.js** (https://nodejs.org/en)
+2. Run `npm install typescript -g`. 
+   - This installs the `tsc` command globally! If you wish to change this, you can read more on the supported installation paths [here](https://www.typescriptlang.org/download).
+3. Copy the `.env.example` to `.env` and make appropriate changes to reflect your local development environment. 
+4. Run `npm install` to install the required npm packages.
+5. Run `npm run start` to start the application. 
+    - Note: The first time launch can take a little longer than subsequent launches, as the entire source (although it's not very large) needs to be compiled first. Subsequent launches will be a lot quicker.
+
+> **Warning** 
+> Please note that the bot will make HTTP calls to `http://hp.vatsim-germany.org/api/teamspeak/${cid}`. 
+> This will not work on your local machine! 
+> To fix this you will need to create a custom mapping between CID and Teamspeak Station IDs (the endpoint expects a response of type `number[]` containing all Teamspeak DBIDs of the requested user) and provide an API endpoint for this. 
+> You could, for example, map all CIDs to your own local TeamSpeak DBID - be aware that you will receive all roles of all currently online controllers though. 
