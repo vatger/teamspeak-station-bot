@@ -14,17 +14,20 @@ If you wish to contribute and/or make changes (especially regarding the aforemen
 
 (1) Also available through the VATSIM Germany Forum
 
+## Prerequisites
+- **Node.js** (https://nodejs.org/en)
+- **Typescript**
+   - Run `npm install typescript -g`
+   - This installs the `tsc` command globally! If you wish to change this, you can read more on the supported installation paths [here](https://www.typescriptlang.org/download).
+
 ## Running the Application
 Running this application in a local environment is a little more challenging, since it requires the use of a local teamspeak3 server. 
 The downloads for teamspeak-server can be found [here](https://www.teamspeak.com/de/downloads/#server). 
 Documentation is included in the downloaded .zip archive. 
 
-1. Install **node.js** (https://nodejs.org/en)
-2. Run `npm install typescript -g`. 
-   - This installs the `tsc` command globally! If you wish to change this, you can read more on the supported installation paths [here](https://www.typescriptlang.org/download).
-3. Copy the `.env.example` to `.env` and make appropriate changes to reflect your local development environment. 
-4. Run `npm install` to install the required npm packages.
-5. Run `npm run start` to start the application. 
+1. Copy the `.env.example` to `.env` and make appropriate changes to reflect your local development environment. 
+2. Run `npm install` to install the required npm packages.
+3. Run `npm run start` to start the application. 
     - Note: The first time launch may take longer than subsequent launches, as the entire source (although it's not very large) needs to be transpiled to .js first.
 
 > **Warning** 
