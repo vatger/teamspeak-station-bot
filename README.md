@@ -28,6 +28,7 @@ Documentation is included in the downloaded .zip archive.
     - Note: The first time launch can take a little longer than subsequent launches, as the entire source (although it's not very large) needs to be compiled first. Subsequent launches will be a lot quicker.
 
 > **Warning** 
+> 
 > Please note that the bot will make HTTP calls to `http://hp.vatsim-germany.org/api/teamspeak/${cid}`. 
 > This will not work on your local machine! 
 > To fix this you will need to create a custom mapping between CID and Teamspeak Station IDs (the endpoint expects a response of type `number[]` containing all Teamspeak DBIDs of the requested user) and provide an API endpoint for this. 
