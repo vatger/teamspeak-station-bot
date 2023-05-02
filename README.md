@@ -25,7 +25,7 @@ Documentation is included in the downloaded .zip archive.
 3. Copy the `.env.example` to `.env` and make appropriate changes to reflect your local development environment. 
 4. Run `npm install` to install the required npm packages.
 5. Run `npm run start` to start the application. 
-    - Note: The first time launch can take a little longer than subsequent launches, as the entire source (although it's not very large) needs to be compiled first. Subsequent launches will be a lot quicker.
+    - Note: The first time launch may take longer than subsequent launches, as the entire source (although it's not very large) needs to be transpiled to .js first.
 
 > **Warning** 
 > 
