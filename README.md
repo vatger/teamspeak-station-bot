@@ -9,7 +9,7 @@ If you wish to contribute and/or make changes (especially regarding the aforemen
 
 |    Name    | Responsible for |               Contact               |
 |:----------:|:---------------:|:-----------------------------------:|
-| Nikolas G. |        *        | `nikolas.goerlitz[at]vatger.de` (1) |
+| Nikolas G. |        *        | `git[at]vatger.de` (1) |
 | Moritz F.  |        *        |                - (1)                |
 
 (1) Also available through the VATSIM Germany Forum
