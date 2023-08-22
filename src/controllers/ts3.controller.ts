@@ -4,7 +4,7 @@ import { DatafeedController } from "../models/datafeedModel";
 import dataFeedService from "../services/dataFeed.service";
 import ts3Service from "../services/ts.service";
 import vatgerService from "../services/vatger.service";
-import atcStationController, { StationMap } from "./atcStation.controller";
+import atcStationController from "./atcStation.controller";
 import { ServerGroupClientEntry } from "ts3-nodejs-library/lib/types/ResponseTypes";
 import LogHelper from "../helper/LogHelper";
 
@@ -96,7 +96,7 @@ async function checkServerGroupExists(serverGroups: TeamSpeakServerGroup[], grou
         return group.name.toLowerCase() === groupName.toLowerCase();
     });
 
-    console.log("Checking Server group", groupName, "exists? -->", group != null);
+    LogHelper.logMessage(`Checking Server group ${groupName} exists: ${groupName != null}`);
 
     return group != null;
 }
@@ -132,7 +132,7 @@ async function removeEmptyServerGroups() {
     serverGroups.forEach(async group => {
         const clientsInGroups = await ts3Service.getClientsInServerGroup(group);
         if (clientsInGroups.length == 0) {
-            console.log("Deleting unused group: ", group.name);
+            LogHelper.logMessage("Deleting unused group: ", group.name);
 
             teamspeak.serverGroupDel(group.sgid);
         }

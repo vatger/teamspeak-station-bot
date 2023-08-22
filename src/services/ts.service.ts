@@ -1,6 +1,7 @@
 import {TeamSpeakServerGroup} from "ts3-nodejs-library";
 import { teamspeak } from "../app";
 import config from "../config";
+import LogHelper from "../helper/LogHelper";
 
 const excludedServerGroupIds: number[] = config().excludedServerGroupIds;
 
@@ -38,7 +39,7 @@ async function addClientToServerGroup(client_db_id: string, serverGroup: TeamSpe
     {
         try {
             await serverGroup.addClient(client_db_id);
-            console.log(`Added client ${client_db_id} to server group: ${serverGroup.name}`);
+            LogHelper.logMessage(`Added client ${client_db_id} to server group: ${serverGroup.name}`);
         } catch (e: any)
         {
             console.error('Failed to add client:', e.msg);
@@ -55,7 +56,7 @@ async function removeClientFromServerGroup(client_db_id: string, serverGroup: Te
     {
         try {
             await serverGroup.delClient(client_db_id);
-            console.log(`Removed client ${client_db_id} from server group: ${serverGroup.name}`);
+            LogHelper.logMessage(`Removed client ${client_db_id} from server group: ${serverGroup.name}`);
         } catch (e: any)
         {
             console.error('Failed to remove client:', e.msg);
