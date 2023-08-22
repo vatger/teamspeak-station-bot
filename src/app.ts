@@ -2,6 +2,8 @@ import { TeamSpeak } from "ts3-nodejs-library";
 import ts3Controller from "./controllers/ts3.controller";
 import config from "./config";
 
+console.log("Starting Application...");
+
 export const teamspeak = new TeamSpeak({
     host: config().ts3Host,
     queryport: config().ts3QueryPort,
@@ -13,7 +15,7 @@ export const teamspeak = new TeamSpeak({
 teamspeak.on("ready", async () => {
     console.log("Teamspeak instance ready");
 
-    await teamspeak.useByPort(config().ts3Port);
+    await teamspeak.useBySid("1");
 
     // Remove groups and update the prefixes once. Then we use the intervals.
     await ts3Controller.forceRemoveAllGroups();
