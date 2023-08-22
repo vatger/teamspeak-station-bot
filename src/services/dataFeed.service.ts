@@ -4,7 +4,7 @@ import config from "../config";
 
 async function getControllersFromDatafeed() {
     const res = await axios.get(config().vatsimDatafeedUrl);
-    const datafeed = res.data;
+    const datafeed = res.data as {data: {failed: boolean; controllers: DatafeedController[]}} | undefined | null;
 
     if (datafeed == null || datafeed.data?.failed == true) {
         throw new Error("Datafeed is down, thanks vatsim");
