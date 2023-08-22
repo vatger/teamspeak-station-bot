@@ -6,7 +6,7 @@ async function getControllersFromDatafeed() {
     const res = await axios.get(config().vatsimDatafeedUrl);
     const datafeed = res.data;
 
-    if (datafeed == null || datafeed.data?.failed == false) {
+    if (datafeed == null || datafeed.data?.failed == true) {
         throw new Error("Datafeed is down, thanks vatsim");
     }
     
