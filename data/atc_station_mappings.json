@@ -183,6 +183,9 @@
   
   {"frequency": "128.900", "id": "OPT", "callsignPrefix": "EDOP"},
   
+  {"frequency": "121.830", "id": "SBG", "callsignPrefix": "EDSB"},
+  {"frequency": "134.105", "id": "SBT", "callsignPrefix": "EDSB"},
+  
   {"frequency": "132.140", "id": "ALP", "callsignPrefix": "EDUU"},
   {"frequency": "123.390", "id": "CHI", "callsignPrefix": "EDUU"},
   {"frequency": "132.730", "id": "DON", "callsignPrefix": "EDUU"},
