@@ -1,5 +1,5 @@
 [
-  {"frequency": "132.825", "id": "AHT", "callsignPrefix": "EDAH"},
+  {"frequency": "132.830", "id": "AHT", "callsignPrefix": "EDAH"},
   
   {"frequency": "119.630", "id": "DBAN", "callsignPrefix": "EDDB"},
   {"frequency": "136.105", "id": "DBANT", "callsignPrefix": "EDDB"},
@@ -155,7 +155,7 @@
   {"frequency": "123.250", "id": "HIT", "callsignPrefix": "EDHI"},
   
   {"frequency": "121.775", "id": "HLG", "callsignPrefix": "EDHL"},
-  {"frequency": "128.700", "id": "HLT", "callsignPrefix": "EDHL"},
+  {"frequency": "128.705", "id": "HLT", "callsignPrefix": "EDHL"},
   
   {"frequency": "121.930", "id": "LPG", "callsignPrefix": "EDLP"},
   {"frequency": "133.380", "id": "LPT", "callsignPrefix": "EDLP"},
@@ -206,7 +206,7 @@
   
   {"frequency": "123.925", "id": "ALR", "callsignPrefix": "EDWW"},
   {"frequency": "123.225", "id": "BOR", "callsignPrefix": "EDWW"},
-  {"frequency": "128.750", "id": "DST", "callsignPrefix": "EDWW"},
+  {"frequency": "128.760", "id": "DST", "callsignPrefix": "EDWW"},
   {"frequency": "124.075", "id": "EIDE", "callsignPrefix": "EDWW"},
   {"frequency": "120.225", "id": "EIDW", "callsignPrefix": "EDWW"},
   {"frequency": "125.025", "id": "EMS", "callsignPrefix": "EDWW"},
@@ -228,7 +228,7 @@
   {"frequency": "124.435", "id": "RHR", "callsignPrefix": "EDYY"},
   {"frequency": "134.710", "id": "SOL", "callsignPrefix": "EDYY"},
   {"frequency": "131.380", "id": "SOLH", "callsignPrefix": "EDYY"},
-  {"frequency": "135.500", "id": "YD", "callsignPrefix": "EDYY"},
+  {"frequency": "135.960", "id": "YD", "callsignPrefix": "EDYY"},
   
   {"frequency": "121.955", "id": "NLA", "callsignPrefix": "ETNL"},
   {"frequency": "123.100", "id": "NLAP", "callsignPrefix": "ETNL"},
