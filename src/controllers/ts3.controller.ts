@@ -55,7 +55,7 @@ async function updatePrefixes() {
                 permvalue: 1,
             });
 
-            console.log("Group created: ", serverGroupName);
+            LogHelper.logMessage(`Group created: ${serverGroupName}`);
 
             for (const tsDbId of controllerTeamspeakIds) {
                 await ts3Service.addClientToServerGroup(tsDbId.toString(), createdGroup);
