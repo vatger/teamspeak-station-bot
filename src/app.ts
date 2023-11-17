@@ -10,6 +10,7 @@ export const teamspeak = new TeamSpeak({
     username: config().ts3Username,
     password: config().ts3Password,
     nickname: config().ts3Nickname,
+    keepAlive: true,
 });
 
 teamspeak.on("ready", async () => {

@@ -101,6 +101,11 @@ async function checkServerGroupExists(serverGroups: TeamSpeakServerGroup[], grou
     return group != null;
 }
 
+/**
+ * Cleans up the server groups removing users that are no longer logged in.
+ * @param serverGroups
+ * @param controllers
+ */
 async function cleanupServerGroups(serverGroups: TeamSpeakServerGroup[], controllers: DatafeedController[]) {
     for (const serverGroup of serverGroups) {
         const clientsInServergroup: ServerGroupClientEntry[] = await ts3Service.getClientsInServerGroup(serverGroup);
@@ -112,14 +117,20 @@ async function cleanupServerGroups(serverGroups: TeamSpeakServerGroup[], control
             LogHelper.logMessage(`Checking client ${clientDbId} in server group ${serverGroup.name}`);
 
             for (const controller of controllers) {
-                const controllerDbIds: number[] = await getControllerDbIds(controller.cid);
-                const stationId: string | undefined = await atcStationController.getStationIdFromFrequency(controller.frequency, controller.callsign);
+                const controllerDbIds: number[] = await getControllerDbIds(controller.cid).catch(e => {
+                    LogHelper.logMessage(`[ERROR] Failed to get controller DB IDs for ${controller.cid}. Error: ${e.message}`);
+                    return [];
+                });
+                const stationId: string | undefined = await atcStationController.getStationIdFromFrequency(controller.frequency, controller.callsign) ?? controller.callsign;
 
-                if (controllerDbIds.indexOf(clientDbId) !== -1 && (stationId ?? controller.callsign).toLowerCase() === serverGroup.name.toLowerCase()) {
+                LogHelper.logMessage(`Controller: ${controller.cid} | TS IDs: ${controllerDbIds} | StationID: ${stationId}`);
+
+                if (controllerDbIds.indexOf(clientDbId) !== -1 && stationId.toLowerCase() === serverGroup.name.toLowerCase()) {
                     continue clientsLoop;
                 }
             }
             await ts3Service.removeClientFromServerGroup(client.cldbid, serverGroup);
+            LogHelper.logMessage(`Removed ${client.clientNickname} from server group: ${serverGroup.name}`);
         }
     }
 }
@@ -129,14 +140,15 @@ async function removeEmptyServerGroups() {
     teamspeakDbIdMap.clear();
 
     const serverGroups = await ts3Service.getCurrentServerGroups();
-    serverGroups.forEach(async group => {
+
+    for (const group of serverGroups) {
         const clientsInGroups = await ts3Service.getClientsInServerGroup(group);
         if (clientsInGroups.length == 0) {
             LogHelper.logMessage("Deleting unused group: ", group.name);
 
-            teamspeak.serverGroupDel(group.sgid);
+            await teamspeak.serverGroupDel(group.sgid);
         }
-    });
+    }
 }
 
 export default {
