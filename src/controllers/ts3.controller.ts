@@ -117,13 +117,8 @@ async function cleanupServerGroups(serverGroups: TeamSpeakServerGroup[], control
             LogHelper.logMessage(`Checking client ${clientDbId} in server group ${serverGroup.name}`);
 
             for (const controller of controllers) {
-                const controllerDbIds: number[] = await getControllerDbIds(controller.cid).catch(e => {
-                    LogHelper.logMessage(`[ERROR] Failed to get controller DB IDs for ${controller.cid}. Error: ${e.message}`);
-                    return [];
-                });
+                const controllerDbIds: number[] = await getControllerDbIds(controller.cid);
                 const stationId: string | undefined = await atcStationController.getStationIdFromFrequency(controller.frequency, controller.callsign) ?? controller.callsign;
-
-                LogHelper.logMessage(`Controller: ${controller.cid} | TS IDs: ${controllerDbIds} | StationID: ${stationId}`);
 
                 if (controllerDbIds.indexOf(clientDbId) !== -1 && stationId.toLowerCase() === serverGroup.name.toLowerCase()) {
                     continue clientsLoop;

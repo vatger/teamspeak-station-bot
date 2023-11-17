@@ -4,9 +4,7 @@ import config from "../config";
 import LogHelper from "../helper/LogHelper";
 
 async function getControllersFromDatafeed() {
-    const res = await axios.get(config().vatsimDatafeedUrl).catch(e => {
-        throw new Error(`Failed Datafeed Request: ${e.message}`);
-    });
+    const res = await axios.get(config().vatsimDatafeedUrl);
     const datafeed = res.data as {data: DatafeedController[]; length: number; failed: boolean} | undefined | null;
 
     if (datafeed == null || datafeed.data == null || datafeed.failed) {
