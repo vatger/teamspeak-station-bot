@@ -22,7 +22,7 @@ async function getStationIdFromFrequency(frequency: string, callsign: string) {
             stationMapping = data.data as StationMap[];
             lastPullDate = new Date();
 
-            LogHelper.logMessage(`Updated station mapping file`);
+            LogHelper.logMessage(`Updated station mapping file from ${config().mappingUrl}`);
         } catch (e: any) {
             LogHelper.logMessage(`Failed to retrieve updated mapping.json. ${e}`);
             return undefined;

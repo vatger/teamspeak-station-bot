@@ -15,6 +15,7 @@ export const teamspeak = new TeamSpeak({
 
 teamspeak.on("ready", async () => {
     console.log("Teamspeak instance ready");
+    console.log(`Updating mapping File from: ${config().mappingUrl}`);
 
     await teamspeak.useBySid("1");
 
