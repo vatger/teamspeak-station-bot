@@ -221,6 +221,8 @@
   {"frequency": "133.725", "id": "WC", "callsignPrefix": "EDWW"},
   
   {"frequency": "119.750", "id": "XWT", "callsignPrefix": "EDXW"},
+
+  {"frequency": "123.255", "id": "HIT", "callsignPrefix": "EDXW"},
   
   {"frequency": "133.955", "id": "CEL", "callsignPrefix": "EDYY"},
   {"frequency": "128.810", "id": "CELH", "callsignPrefix": "EDYY"},
