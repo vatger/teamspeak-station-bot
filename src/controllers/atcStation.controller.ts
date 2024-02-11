@@ -25,7 +25,9 @@ async function getStationIdFromFrequency(frequency: string, callsign: string) {
             LogHelper.logMessage(`Updated station mapping file from ${config().mappingUrl}`);
         } catch (e: any) {
             LogHelper.logMessage(`Failed to retrieve updated mapping.json. ${e}`);
-            return undefined;
+            // If we failed to retrieve the mapping file, we'll just reuse our old one.
+            // If we don't have the old one, then stationMapping will equal null.
+            // Which will return undefined in the next query.
         }
     }
 
