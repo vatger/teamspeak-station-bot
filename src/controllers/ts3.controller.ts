@@ -151,10 +151,6 @@ async function removeEmptyServerGroups() {
     }
 }
 
-async function checkServerLoadAndUpdateTimeout(){
-    teamspeak.checkServerLoadAndUpdateTimeout();
-}
-
 async function checkServerFull(){
     LogHelper.logMessage("Checking if Server almost full -> reduce max idle time")
 
@@ -165,5 +161,4 @@ export default {
     updatePrefixes,
     forceRemoveAllGroups,
     removeEmptyServerGroups,
-    checkServerLoadAndUpdateTimeout,
 };

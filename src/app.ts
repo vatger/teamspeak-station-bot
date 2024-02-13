@@ -1,5 +1,6 @@
 import { TeamSpeak } from "ts3-nodejs-library";
 import ts3Controller from "./controllers/ts3.controller";
+import ts3Service from "./services/ts.service";
 import config from "./config";
 
 console.log("Starting Application...");
@@ -41,7 +42,7 @@ teamspeak.on("ready", async () => {
 
     setInterval(async () => {
         try {
-            await ts3Controller.checkServerLoadAndUpdateTimeout();
+            await ts3Service.checkServerLoadAndUpdateTimeout();
         } catch (error: any) {
             console.error(error);
         }
