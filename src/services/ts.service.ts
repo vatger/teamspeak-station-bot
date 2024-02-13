@@ -73,13 +73,13 @@ async function checkServerLoadAndUpdateTimeout()
     if(load > config().maxServerLoad)
     {
         await teamspeak.serverGroupAddPerm(serverGroup, {
-            permname: "i_channel_subscribe_power",
+            permname: "i_client_max_idletime",
             permvalue: 1800,
         })
     }
     else{
         await teamspeak.serverGroupAddPerm(serverGroup, {
-            permname: "i_channel_subscribe_power",
+            permname: "i_client_max_idletime",
             permvalue: 18000,
         })
     }
