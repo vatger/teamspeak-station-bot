@@ -38,6 +38,14 @@ teamspeak.on("ready", async () => {
             console.error(error);
         }
     }, 1000 * 60 * 60); // 60 Minutes
+
+    setInterval(async () => {
+        try {
+            await ts3Controller.checkServerLoadAndUpdateTimeout();
+        } catch (error: any) {
+            console.error(error);
+        }
+    }, 1000 * 30); // 30 Seconds
 });
 
 teamspeak.on("error", () => {
