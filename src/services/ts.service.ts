@@ -68,7 +68,12 @@ async function checkServerLoadAndUpdateTimeout()
 {
     const serverInfo = await teamspeak.serverInfo();
     const load = serverInfo.virtualserverClientsonline / serverInfo.virtualserverMaxclients;
-    let serverGroup: TeamSpeakServerGroup = await teamspeak.getServerGroupById(config().registeredServerGroupId);
+    let serverGroup: TeamSpeakServerGroup | undefined = await teamspeak.getServerGroupById(config().registeredServerGroupId);
+
+    if (!serverGroup)
+    {
+        return;
+    }
 
     if(load > config().maxServerLoad)
     {
