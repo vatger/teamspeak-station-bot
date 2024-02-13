@@ -64,9 +64,31 @@ async function removeClientFromServerGroup(client_db_id: string, serverGroup: Te
     }
 }
 
+async function checkServerLoadAndUpdateTimeout()
+{
+    const serverInfo = await teamspeak.serverInfo();
+    const load = serverInfo.virtualserverClientsonline / serverInfo.virtualserverMaxclients;
+    let serverGroup: TeamSpeakServerGroup = await teamspeak.getServerGroupById(config().registeredServerGroupId);
+
+    if(load > config().maxServerLoad)
+    {
+        await teamspeak.serverGroupAddPerm(serverGroup, {
+            permname: "i_channel_subscribe_power",
+            permvalue: 1800,
+        })
+    }
+    else{
+        await teamspeak.serverGroupAddPerm(serverGroup, {
+            permname: "i_channel_subscribe_power",
+            permvalue: 18000,
+        })
+    }
+}
+
 export default {
     getCurrentServerGroups,
     getClientsInServerGroup,
     addClientToServerGroup,
-    removeClientFromServerGroup
+    removeClientFromServerGroup,
+    checkServerLoadAndUpdateTimeout,
 };

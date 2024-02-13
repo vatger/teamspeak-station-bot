@@ -55,6 +55,11 @@ async function updatePrefixes() {
                 permvalue: 1,
             });
 
+            await createdGroup.addPerm({
+                permname: "i_client_max_idletime",
+                permvalue: 18000,
+            });
+
             LogHelper.logMessage(`Group created: ${serverGroupName}`);
 
             for (const tsDbId of controllerTeamspeakIds) {
@@ -146,8 +151,19 @@ async function removeEmptyServerGroups() {
     }
 }
 
+async function checkServerLoadAndUpdateTimeout(){
+    teamspeak.checkServerLoadAndUpdateTimeout();
+}
+
+async function checkServerFull(){
+    LogHelper.logMessage("Checking if Server almost full -> reduce max idle time")
+
+
+}
+
 export default {
     updatePrefixes,
     forceRemoveAllGroups,
     removeEmptyServerGroups,
+    checkServerLoadAndUpdateTimeout,
 };

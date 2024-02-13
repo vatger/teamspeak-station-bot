@@ -14,6 +14,8 @@ interface PrefixBotConfig {
     apiToken: string,
     mappingUrl: string,
     mappingDownloadInterval: number,
+    maxServerLoad: number,
+    registeredServerGroupId: number,
     debug: boolean
   }
 
@@ -31,6 +33,8 @@ export default function config(): PrefixBotConfig {
         apiToken: process.env.API_TOKEN ?? '',
         mappingUrl: process.env.MAPPING_URL ?? '',
         mappingDownloadInterval: Number(process.env.MAPPING_DOWNLOAD_INTERVAL) ?? 5,
+        maxServerLoad: Number(process.env.MAX_SERVER_LOAD) ?? 0.8,
+        registeredServerGroupId: Number(process.env.REGISTERED_SERVER_GROUP) ?? 10,
         debug: Boolean(process.env.DEBUG?.toLowerCase())
 
     };
